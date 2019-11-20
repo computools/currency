@@ -23,11 +23,7 @@ class CurrencyUpdater
         $currencies = $this->currencyProvider->getCurrenciesList();
 
         foreach ($currencies as $currency) {
-            if (!$this->currencyRepository->findById($currency->id)) {
                 $this->currencyRepository->create($currency);
-            } else {
-                $this->currencyRepository->update($currency);
-            }
         }
     }
 }

@@ -10,4 +10,5 @@ interface CurrencyRepositoryInterface
     public function findById(string $id): ?Currency;
     public function create(Currency $currency): Currency;
     public function update(Currency $currency): Currency;
+    public function findByCode(string $code): array;
 }

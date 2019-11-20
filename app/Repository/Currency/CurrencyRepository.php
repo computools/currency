@@ -5,6 +5,7 @@ namespace App\Repository\Currency;
 use Domain\Entities\Currency;
 use App\Currency as CurrencyModel;
 use Domain\Contracts\CurrencyRepositoryInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class CurrencyRepository implements CurrencyRepositoryInterface
 {
@@ -33,7 +34,7 @@ class CurrencyRepository implements CurrencyRepositoryInterface
 
     public function findById(string $id): ?Currency
     {
-        if (!$currencyModel = CurrencyModel::where('id', $id)->first()) {
+        if (!$currencyModel = CurrencyModel::where('original_id', $id)->orderBy('created_at', 'DESC')->first()) {
             return null;
         }
         return $this->currencyMapper->mapToEntity($currencyModel);
@@ -49,5 +50,15 @@ class CurrencyRepository implements CurrencyRepositoryInterface
             'code' => $currency->code
         ]);
         return $this->currencyMapper->mapToEntity($currencyModel);
+    }
+
+    public function findByCode(string $code): array
+    {
+        $currencies = CurrencyModel::where('original_id', $code)->orderBy('created_at', 'ASC')->get();
+
+        if (count($currencies) === 0) {
+            throw new NotFoundHttpException();
+        }
+        return $this->currencyMapper->mapCollection($currencies);
     }
 }

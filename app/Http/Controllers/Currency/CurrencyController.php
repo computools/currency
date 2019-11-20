@@ -39,4 +39,11 @@ class CurrencyController extends Controller
             $this->currencyService->getCurrencyById($code)
         );
     }
+
+    public function getHistory(string $code): JsonResponse
+    {
+        return response()->json(
+            $this->currencyService->getHistoricalData($code)
+        );
+    }
 }

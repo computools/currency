@@ -34,6 +34,11 @@ class CurrencyService
         return $this->currencyRepository->findById($id);
     }
 
+    public function getHistoricalData(string $code)
+    {
+        return $this->currencyRepository->findByCode($code);
+    }
+
     public function updateCurrencies(): void
     {
         $this->currencyUpdater->performUpdate();
