@@ -36,6 +36,10 @@ Getting slice of currencies, example:
 ```
 /api/currencies?take=20&skip=20
 ```
+Getting history of currency, example:
+```
+/api/currencies/history/036
+```
 ### Tests
 Running tests:
 ```
