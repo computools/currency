@@ -15,6 +15,6 @@ use Illuminate\Http\Request;
 
 Route::middleware('api-auth')->get('/currencies', "Currency\CurrencyController@getList");
 Route::middleware('api-auth')->get('/currency/{code}', "Currency\CurrencyController@getCurrencyRate");
-Route::middleware('api-auth')->get('/currencies/history/{code}', "Currency\CurrencyCont roller@getHistory");
+Route::middleware('api-auth')->get('/currencies/history/{code}', "Currency\CurrencyController@getHistory");
 
 
